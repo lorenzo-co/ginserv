@@ -1,4 +1,4 @@
-module ginserv
+module github.com/lorenzo-co/ginserv
 
 go 1.21.3
 

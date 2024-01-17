@@ -3,11 +3,11 @@ package main
 import (
 	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/lorenzo-co/ginserv/controllers"
 	"github.com/lorenzo-co/ginserv/models"
-)
 
-var db = make(map[string]string)
+	"github.com/gin-gonic/gin"
+)
 
 func setupRouter() *gin.Engine {
 	// Disable Console Color
@@ -24,7 +24,16 @@ func setupRouter() *gin.Engine {
 func main() {
 	r := gin.Default()
 
-	models.ConnectDatabase() // new
+	models.ConnectDatabase()
 
-	r.Run()
+	r.GET("/books", controllers.FindBooks)
+	r.POST("/books", controllers.CreateBook)
+	r.GET("/books/:id", controllers.FindBook)
+	r.PATCH("/books/:id", controllers.UpdateBook)
+	r.DELETE("/books/:id", controllers.DeleteBook)
+
+	err := r.Run(":8080")
+	if err != nil {
+		return
+	}
 }

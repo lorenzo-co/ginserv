@@ -10,7 +10,8 @@ var DB *gorm.DB
 
 func ConnectDatabase() {
 
-	database, err := gorm.Open(postgres.Open("test.db"), &gorm.Config{})
+	dsn := "host=localhost user=lorenzo password=postgres dbname=postgres port=5432 sslmode=disable"
+	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		panic("Failed to connect to database!")
